@@ -33,8 +33,52 @@ async login (req, res){
           sucesso: false
       });
   }
-}
+},
+
+
+async editarUsuario(req, res){
+  const { nome,email, senha, } = req.body;
+  
+  const sucesso = await User.findOneAndUpdate({ email}, {  
+      nome,
+      email, 
+      senha, 
+  }).then(function(result){
+      return true;
+  }).catch(e =>{
+      return false;
+  })
+
+  if(sucesso){
+      res.status(200).json({
+          sucesso: true
+      });
+  }else{
+      res.status(500).json({
+          sucesso: false
+      });
+  }
+},
 //
+
+async removerUsuario(req, res){
+  const { email } = req.body;
+  const sucesso = await User.findOneAndRemove({ email: email},function(err,result){
+      if(err) return false;
+      return true;
+  });
+
+  if(sucesso){
+      res.status(200).json({
+          sucesso: true
+      });
+  }else{
+      res.status(500).json({
+          sucesso: false
+      });
+  }
+  
+},
 
 
 };
