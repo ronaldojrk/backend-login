@@ -25,4 +25,25 @@ module.exports ={
     return res.json(favoritos);
   },
 
+
+
+  async removerFavoritos(req, res){
+    const { nome,id_filme,id_user } = req.body;
+    const sucesso = await Favoritos.findOneAndDelete({ nome,id_filme,id_user},function(err,result){
+        if(err) return false;
+        return true;
+    });
+  
+    if(sucesso){
+        res.status(200).json({
+            sucesso: true
+        });
+    }else{
+        res.status(500).json({
+            sucesso: false
+        });
+    }
+    
+  },
+
 };

@@ -20,6 +20,7 @@ routes.put('/editarusuario', SessionController.editarUsuario);
 routes.get('/listafavo',FavoritosController.index);
 routes.get('/listasuasfavoitas',FavoritosController.favo);
 routes.post('/criarfavo',FavoritosController.store);
+routes.delete('/removerfavoritos', FavoritosController.removerFavoritos);
 
 
 
